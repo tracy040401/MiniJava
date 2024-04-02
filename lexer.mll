@@ -29,7 +29,9 @@ rule get_token = parse
   | '-'       { MINUS }
   | '*'       { TIMES }
   | "&&"      { AND }
+  | "||"      { OR }
   | "<"       { LT }
+  | ">"       { GT }
   | '('       { LPAREN }
   | ')'       { RPAREN }
   | '['       { LBRACKET }
