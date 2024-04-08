@@ -17,9 +17,11 @@
 %token IF ELSE WHILE
 %token EOF
 
+%nonassoc NOELSE
+%nonassoc ELSE
 %left OR
 %left AND
-%nonassoc LT GT
+%nonassoc LT GT EQ
 %left PLUS MINUS
 %left TIMES
 %nonassoc NOT
@@ -169,7 +171,7 @@ instruction:
    { IIf (c, i1, i2) }
 
 // if sans else 
-| IF LPAREN c = expression RPAREN i1 = instruction // ce qu'on lit 
+| IF LPAREN c = expression RPAREN i1 = instruction %prec NOELSE// ce qu'on lit 
    { IIf (c, i1, IBlock([])) } // ce qu'on reconnait 
 
 | WHILE LPAREN c = expression RPAREN i = instruction
