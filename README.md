@@ -82,3 +82,5 @@ git checkout master
 make
 ```
 
+The branch `ast_typed` has an abstract syntax tree decorated with type information. This tree is produced by the typechecker and it can be useful if you want to augment `MiniJava`.
+

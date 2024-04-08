@@ -26,6 +26,7 @@ and binop = LMJ.binop =
   | OpSub
   | OpMul
   | OpLt
+  | OpEq
   | OpGt
   | OpAnd
   | OpOr

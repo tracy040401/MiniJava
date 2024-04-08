@@ -300,6 +300,7 @@ let binop2c
   | OpSub -> fprintf out "-"
   | OpMul -> fprintf out "*"
   | OpLt  -> fprintf out "<"
+  | OpEq  -> fprintf out "=="
   | OpGt  -> fprintf out ">"
   | OpAnd -> fprintf out "&&"
   | OpOr  -> fprintf out "||"
