@@ -23,17 +23,10 @@ let binop out = function
      fprintf out "*"
   | OpLt  ->
      fprintf out "<"
-<<<<<<< HEAD
   | OpEq  ->
       fprintf out "=="
-=======
-  | OpGt  ->
-     fprintf out ">"
->>>>>>> 6e2a42ade5d75549a04907f0222f57516f9b28ee
   | OpAnd ->
      fprintf out "&&"
-  | OpOr  ->
-     fprintf out "||"
 
 (** [expr out e], [expr0 out e], ..., [expr6 out e] print the expression [e]
     on the output channel [out]. [expr] is a synonym for [expr6].
@@ -113,7 +106,6 @@ and expr5 out e = match e.raw_expression with
 
 and expr6 out e = match e.raw_expression with
   | EBinOp ((OpLt | OpAnd | OpEq) as op, e1, e2) ->
-  | EBinOp ((OpLt | OpGt | OpAnd | OpOr) as op, e1, e2) ->
      fprintf out "%a %a %a"
        expr6 e1
        binop op
