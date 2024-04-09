@@ -59,6 +59,8 @@ let rec compatible (typ1 : typ) (typ2 : typ) (instanceof : identifier -> identif
   match typ1, typ2 with
   | TypInt, TypInt
   | TypBool, TypBool
+  | TypString, TypString
+  | TypFloat, TypFloat
   | TypIntArray, TypIntArray -> true
   | Typ t1, Typ t2 -> instanceof t1 t2
   | _, _ -> false
@@ -67,6 +69,8 @@ let rec compatible (typ1 : typ) (typ2 : typ) (instanceof : identifier -> identif
 let rec type_lmj_to_tmj = function
   | TypInt      -> TMJ.TypInt
   | TypBool     -> TMJ.TypBool
+  | TypString     -> TMJ.TypString
+  | TypFloat     -> TMJ.TypFloat
   | TypIntArray -> TMJ.TypIntArray
   | Typ id      -> TMJ.Typ (Location.content id)
 
@@ -74,6 +78,8 @@ let rec type_lmj_to_tmj = function
 let rec type_tmj_to_lmj startpos endpos = function
 | TMJ.TypInt      -> TypInt
 | TMJ.TypBool     -> TypBool
+| TMJ.TypString   -> TypString
+| TMJ.TypFloat    -> TypFloat
 | TMJ.TypIntArray -> TypIntArray
 | TMJ.Typ id      -> Typ (Location.make startpos endpos id)
 
@@ -81,6 +87,8 @@ let rec type_tmj_to_lmj startpos endpos = function
 let rec tmj_type_to_string : TMJ.typ -> string = function
   | TMJ.TypInt -> "integer"
   | TMJ.TypBool -> "boolean"
+  | TMJ.TypString -> "string"
+  | TMJ.TypFloat -> "float"
   | TMJ.TypIntArray -> "int[]"
   | TMJ.Typ t -> t
 
@@ -150,6 +158,12 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
 
   | EConst (ConstInt i) ->
       mke (TMJ.EConst (ConstInt i)) TypInt
+
+  | EConst (ConstString s) ->
+    mke (TMJ.EConst (ConstString s)) TypString
+
+  | EConst (ConstFloat f) ->
+    mke (TMJ.EConst (ConstFloat f)) TypFloat
 
   | EGetVar v ->
      let typ = vlookup v venv in
@@ -268,8 +282,13 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       
 
   | ISyso e ->
-     let e' = typecheck_expression_expecting cenv venv vinit instanceof TypInt e in
-     (TMJ.ISyso e', vinit)
+     let ex = typecheck_expression cenv venv vinit instanceof e in
+     match ex.typ with
+      |TypFloat 
+      |TypString 
+      |TypBool
+      |TypInt -> (TMJ.ISyso ex, vinit)
+      | _ -> error e "not type good"
 
 (** [occurences x bindings] returns the elements in [bindings] that have [x] has identifier. *)
 let occurrences (x : string) (bindings : (identifier * 'a) list) : identifier list =

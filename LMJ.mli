@@ -25,6 +25,8 @@ and raw_expression =
 and constant =
   | ConstBool of bool (** Boolean constant [true] or [false]. *)
   | ConstInt of int32 (** Integer constant [[-2^31, 2^31 - 1]]. *)
+  | ConstString of string (** Integer constant [[...]]. *)
+  | ConstFloat of float (** Integer constant [[...]]. *)
 
 and binop =
   | OpAdd (** Binary operator [+]. *)
@@ -56,6 +58,8 @@ and typ =
   | TypBool (** Type [bool]. *)
   | TypIntArray (** Type [int[]]. *)
   | Typ of identifier (** A class type. *)
+  | TypString (** Type [string]. *)
+  | TypFloat (** Type [float]. *)
 
 and metho = {
   formals: (identifier * typ) list; (** The names of the parameters of the method with their types. *)

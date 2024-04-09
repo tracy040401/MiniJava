@@ -5,9 +5,11 @@
 
 %token <int32> INT_CONST
 %token <bool> BOOL_CONST
+%token <string> STRING_CONST
+%token <float> FLOAT_CONST
 %token INTEGER BOOLEAN
 %token <string Location.t> IDENT
-%token CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS RETURN
+%token CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS RETURN FLOAT
 %token PLUS MINUS TIMES NOT LT LEQ GT GEQ AND OR EQ INEQ
 %token COMMA SEMICOLON
 %token ASSIGN
@@ -122,6 +124,12 @@ raw_expression:
 | b = BOOL_CONST
    { EConst (ConstBool b) }
 
+| s = STRING_CONST
+   { EConst (ConstString s) }
+
+| f = FLOAT_CONST
+   { EConst (ConstFloat f) }
+
 | id = IDENT
    { EGetVar id }
 
@@ -201,3 +209,7 @@ typ:
    { TypIntArray }
 | id = IDENT
    { Typ id }
+| STRING
+   { TypString }
+| FLOAT
+   { TypFloat }
