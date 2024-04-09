@@ -31,8 +31,11 @@ rule get_token = parse
   | "&&"      { AND }
   | "||"      { OR }
   | "<"       { LT }
-  | "=="      { EQ }
+  | "<="       { LEQ }
+  | "=="       { EQ }
+  | "!="       { INEQ }
   | ">"       { GT }
+  | ">="       { GEQ }
   | '('       { LPAREN }
   | ')'       { RPAREN }
   | '['       { LBRACKET }

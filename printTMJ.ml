@@ -23,10 +23,16 @@ let binop out = function
      fprintf out "*"
   | OpLt  ->
      fprintf out "<"
+   | OpLeq  ->
+      fprintf out "<="
   | OpEq  ->
       fprintf out "=="
+   | OpIneq  ->
+         fprintf out "!="
   | OpGt  ->
      fprintf out ">"
+   | OpGeq  ->
+      fprintf out ">="
   | OpAnd ->
      fprintf out "&&"
   | OpOr  ->
@@ -109,7 +115,7 @@ and expr5 out e = match e.raw_expression with
      expr4 out e
 
 and expr6 out e = match e.raw_expression with
-  | EBinOp ((OpLt | OpGt | OpAnd | OpOr | OpEq) as op, e1, e2) ->
+  | EBinOp ((OpLt | OpLeq | OpGt | OpGeq | OpAnd | OpOr | OpEq | OpIneq) as op, e1, e2) ->
      fprintf out "%a %a %a"
        expr6 e1
        binop op

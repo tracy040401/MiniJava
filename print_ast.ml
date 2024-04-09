@@ -77,12 +77,18 @@ let print_binop out = function
      fprintf out "OpSub"
   | OpMul ->
      fprintf out "OpMul"
+  | OpLeq  ->
+     fprintf out "OpLeq"
   | OpLt  ->
-     fprintf out "OpLt"
+      fprintf out "OpLt"
   | OpEq  ->
       fprintf out "OpEq"
+  | OpIneq  ->
+        fprintf out "OpIneq"
   | OpGt  ->
      fprintf out "OpGt"
+  | OpGeq  ->
+      fprintf out "OpGeq"
   | OpAnd ->
      fprintf out "OpAnd"
   | OpOr  ->

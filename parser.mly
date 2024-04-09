@@ -8,7 +8,7 @@
 %token INTEGER BOOLEAN
 %token <string Location.t> IDENT
 %token CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS RETURN
-%token PLUS MINUS TIMES NOT LT GT AND OR EQ
+%token PLUS MINUS TIMES NOT LT LEQ GT GEQ AND OR EQ INEQ
 %token COMMA SEMICOLON
 %token ASSIGN
 %token LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
@@ -17,9 +17,16 @@
 %token IF ELSE WHILE FOR
 %token EOF
 
-%left OR
+%nonassoc NOELSE
+%nonassoc ELSE
 %left AND
-%nonassoc LT GT
+%left OR
+%nonassoc GT
+%nonassoc LT
+%nonassoc GEQ
+%nonassoc LEQ
+%nonassoc EQ
+%nonassoc INEQ
 %left PLUS MINUS
 %left TIMES
 %nonassoc NOT
@@ -147,8 +154,11 @@ raw_expression:
 | MINUS { OpSub }
 | TIMES { OpMul }
 | LT    { OpLt }
+| LEQ { OpLeq }
 | EQ    { OpEq }
+| INEQ { OpIneq }
 | GT    { OpGt }
+| GEQ    { OpGeq }
 | AND   { OpAnd }
 | OR    { OpOr }
 
@@ -169,7 +179,7 @@ instruction:
    { IIf (c, i1, i2) }
 
 // if sans else 
-| IF LPAREN c = expression RPAREN i1 = instruction // ce qu'on lit 
+| IF LPAREN c = expression RPAREN i1 = instruction %prec NOELSE// ce qu'on lit 
    { IIf (c, i1, IBlock([])) } // ce qu'on reconnait 
 
 | WHILE LPAREN c = expression RPAREN i = instruction

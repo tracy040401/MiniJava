@@ -26,7 +26,7 @@
 <code class="code"><span class="keyword">sig</span><br>
 &nbsp;&nbsp;<span class="keyword">type</span>&nbsp;identifier&nbsp;=&nbsp;string&nbsp;<span class="constructor">Location</span>.t<br>
 &nbsp;&nbsp;<span class="keyword">type</span>&nbsp;expression&nbsp;=&nbsp;<span class="constructor">LMJ</span>.raw_expression&nbsp;<span class="constructor">Location</span>.t<br>
-&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;raw_expression&nbsp;=<br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;raw_expression&nbsp;<=br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">EConst</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.constant<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">EGetVar</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.identifier<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">EUnOp</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.unop&nbsp;*&nbsp;<span class="constructor">LMJ</span>.expression<br>
@@ -40,7 +40,7 @@
 &nbsp;&nbsp;<span class="keyword">and</span>&nbsp;constant&nbsp;=&nbsp;<span class="constructor">ConstBool</span>&nbsp;<span class="keyword">of</span>&nbsp;bool&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">ConstInt</span>&nbsp;<span class="keyword">of</span>&nbsp;int32<br>
 &nbsp;&nbsp;<span class="keyword">and</span>&nbsp;binop&nbsp;=&nbsp;<span class="constructor">OpAdd</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">OpSub</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">OpMul</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">OpLt</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">OpAnd</span><br>
 &nbsp;&nbsp;<span class="keyword">and</span>&nbsp;unop&nbsp;=&nbsp;<span class="constructor">UOpNot</span><br>
-&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;instruction&nbsp;=<br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;instruction&nbsp;<=br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">IBlock</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.instruction&nbsp;list<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">IIf</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.expression&nbsp;*&nbsp;<span class="constructor">LMJ</span>.instruction&nbsp;*&nbsp;<span class="constructor">LMJ</span>.instruction<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">IWhile</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">LMJ</span>.expression&nbsp;*&nbsp;<span class="constructor">LMJ</span>.instruction<br>
