@@ -33,7 +33,6 @@ and binop =
   | OpLt (** Binary operator [<]. *)
   | OpEq  (** Binary operator [==]. *)
   | OpGt  (** Binary operator [>]. *)
-
   | OpAnd (** Binary operator [&&]. *)
   | OpOr  (** BInary operator [||]. *)
 
@@ -43,6 +42,7 @@ and instruction =
   | IBlock of instruction list (** [IBlock [i1; i2; ...; in]] represents the instruction [{ i1 i2 ... in }]. *)
   | IIf of expression * instruction * instruction (** [IIf (e, i1, i2)] represents the instruction [if (e) i1 else i2]. *)
   | IWhile of expression * instruction (** [IWile (e, ins)] represents the instruction [while (e) ins]. *)
+  | IFor of identifier * expression * expression * identifier * expression * instruction (** [IFor (e, ins)] represents the instruction [for (e1, e2, e3) ins]. *)
   | ISyso of expression (** [ISyso e] represents the instruction [System.out.println(e);]. *)
   | ISetVar of identifier * expression (** [ISetVar (id, e)] represents the instruction [id = e;]. *)
   | IArraySet of identifier * expression * expression (** [IArraySet (id, e1, e2)] represents the instruction [id[e1] = e2;]. *)

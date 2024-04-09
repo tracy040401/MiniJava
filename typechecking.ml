@@ -255,6 +255,15 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
       (TMJ.IWhile (cond', ibody'), vinit)
 
+  | IFor (id1, expr1, cond, id2, expr2, ibody) ->
+    let vinit = S.add (Location.content id1) vinit in
+    let expr1' = typecheck_expression_expecting cenv venv vinit instanceof TypInt expr1 in
+    let cond' = typecheck_expression_expecting cenv venv vinit instanceof TypBool cond in
+    let expr2' = typecheck_expression_expecting cenv venv vinit instanceof TypInt expr2 in
+    let ibody', vinit = typecheck_instruction cenv venv vinit instanceof ibody in
+    (TMJ.IFor ((Location.content id1), expr1', cond', (Location.content id2), expr2', ibody'), vinit)
+      
+
   | ISyso e ->
      let e' = typecheck_expression_expecting cenv venv vinit instanceof TypInt e in
      (TMJ.ISyso e', vinit)

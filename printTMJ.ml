@@ -141,6 +141,14 @@ let rec instr out = function
       fprintf out "while (%a) %a"
         expr c
         instr i
+  | IFor (id1, c1, c2, id2, c3, i) ->
+      fprintf out "for (%s=%a; %a; %s=%a) %a"
+        id1
+        expr c1
+        expr c2
+        id2
+        expr c3
+        instr i
   | IBlock is ->
      fprintf out "{%a%t}"
        (indent indentation (sep_list nl instr)) is

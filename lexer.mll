@@ -31,7 +31,7 @@ rule get_token = parse
   | "&&"      { AND }
   | "||"      { OR }
   | "<"       { LT }
-  | "=="       { EQ }
+  | "=="      { EQ }
   | ">"       { GT }
   | '('       { LPAREN }
   | ')'       { RPAREN }
@@ -64,6 +64,7 @@ rule get_token = parse
   | "if"    { IF }
   | "else"  { ELSE }
   | "while" { WHILE }
+  | "for"   { FOR }
   | integer as i
       {
         try

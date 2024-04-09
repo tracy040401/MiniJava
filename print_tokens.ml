@@ -94,6 +94,8 @@ let print_token show_loc out = function
      fprintf out "ELSE"
   | WHILE ->
      fprintf out "WHILE"
+  | FOR ->
+     fprintf out "FOR"
   | EOF ->
      fprintf out "EOF"
 
