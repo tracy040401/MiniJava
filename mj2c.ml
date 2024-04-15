@@ -289,6 +289,8 @@ let constant2c
   | ConstBool true  -> fprintf out "1"
   | ConstBool false -> fprintf out "0"
   | ConstInt i      -> fprintf out "%ld" i
+  | ConstString str      -> fprintf out "\"%s\"" str
+  | ConstFloat f      -> fprintf out "%f" f
 
 (** [binop2c out op] transpiles the binary operator [op] to C on the output channel [out]. *)
 let binop2c
@@ -318,6 +320,8 @@ let type2c
   | TypBool -> fprintf out "int"
   | TypIntArray -> fprintf out "struct %s*" !struct_array_name
   | Typ t -> fprintf out "struct %s*" t
+  | TypString -> fprintf out "char*"
+  | TypFloat -> fprintf out "float"
 
 (** [cast out typ] transpiles the cast to [typ] to C on the output channel [out]. *)
 let cast
@@ -487,8 +491,19 @@ let instr2c
          nl
 
     | ISyso e ->
-       fprintf out "printf(\"%%d\\n\", %a);"
-         (expr2c method_name class_info) e
+      match e.typ with 
+        | TypString -> fprintf out "printf(\"%%s\\n\", %a);"
+        (expr2c method_name class_info) e
+
+        | TypFloat -> fprintf out "printf(\"%%f\\n\", %a);"
+          (expr2c method_name class_info) e
+        
+        | TypBool -> fprintf out "printf(\"%%d\\n\", %a);"
+          (expr2c method_name class_info) e
+
+        (* code du prof : *)
+        | _ -> fprintf out "printf(\"%%d\\n\", %a);"
+          (expr2c method_name class_info) e
   in
   instr2c out ins
 

@@ -14,10 +14,18 @@ let print_token show_loc out = function
      fprintf out "INT_CONST %s%ld%s" lquote i rquote
   | BOOL_CONST b ->
      fprintf out "BOOL_CONST %s%s%s" lquote (string_of_bool b) rquote
+   | STRING_CONST s ->
+      fprintf out "STRING_CONST %s%s%s" lquote s rquote
+   | FLOAT_CONST f ->
+      fprintf out "FLOAT_CONST %s%f%s" lquote f rquote
   | INTEGER ->
      fprintf out "INTEGER"
   | BOOLEAN ->
      fprintf out "BOOLEAN"
+   | STRING ->
+      fprintf out "STRING"
+   | FLOAT ->
+      fprintf out "FLOAT"
   | IDENT id ->
      if show_loc then
        let pos = Location.startpos id in
@@ -36,8 +44,8 @@ let print_token show_loc out = function
      fprintf out "VOID"
   | MAIN ->
      fprintf out "MAIN"
-  | STRING ->
-     fprintf out "STRING"
+  (* | STRING ->
+     fprintf out "STRING" *)
   | EXTENDS ->
      fprintf out "EXTENDS"
   | RETURN ->

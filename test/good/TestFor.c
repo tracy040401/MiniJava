@@ -1,10 +1,10 @@
 /*
-class Test {
+class TestFor {
   public static void main(String[] args) {
-    System.out.println(new TestFor().run());
+    System.out.println(new Test().run());
   }
 }
-class TestFor {
+class Test {
   public int run() {
     int i;
     int j;
@@ -22,13 +22,13 @@ class TestFor {
 #pragma GCC diagnostic ignored "-Wint-to-pointer-cast"
 struct array { int* array; int length; };
 tgc_t gc;
-struct TestFor;
-void* TestFor_run(struct TestFor* this);
-struct TestFor {
+struct Test;
+void* Test_run(struct Test* this);
+struct Test {
   void* (**vtable)();
 };
-void* (*TestFor_vtable[])() = { TestFor_run };
-void* TestFor_run(struct TestFor* this) {
+void* (*Test_vtable[])() = { Test_run };
+void* Test_run(struct Test* this) {
   int i;
   int j;
   j = 0;
@@ -39,7 +39,7 @@ void* TestFor_run(struct TestFor* this) {
 }
 int main(int argc, char *argv[]) {
   tgc_start(&gc, &argc);
-  printf("%d\n", ({ struct TestFor* tmp1 = ({ struct TestFor* res = tgc_calloc(({ extern tgc_t gc; &gc; }), 1, sizeof(*res)); res->vtable = TestFor_vtable; res; }); (int) tmp1->vtable[0](tmp1); }));
+  printf("%d\n", ({ struct Test* tmp1 = ({ struct Test* res = tgc_calloc(({ extern tgc_t gc; &gc; }), 1, sizeof(*res)); res->vtable = Test_vtable; res; }); (int) tmp1->vtable[0](tmp1); }));
   tgc_stop(&gc);
 
   return 0;
