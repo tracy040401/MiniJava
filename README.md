@@ -1,3 +1,21 @@
+## Notre travail Jeanne & Tracy
+
+- || ok 
+- == ok 
+- if sans else ok 
+- != ok 
+- <, >, <=, >= ok
+- for ok 
+- string, float, boolean ok
+- sysout avec int, float, string, boolean ok
+- do...while... ok 
+- main avec plusieurs instructions ok 
+
+
+# Remarques 
+float ok mais le test ne fonctionne pas car en C, on a le résultat suivant : 42.20000 et en java 42.2 
+
+
 ## MiniJava Transpiler
 
 `mini-java` is an educational transpiler from [MiniJava](http://www.cambridge.org/resources/052182060X/), which is a subset of [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29),
